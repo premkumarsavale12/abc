@@ -7,6 +7,16 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { Right } from '@/blocks/Right/Component'
+import { MainBlock } from '@/blocks/Main/Component'
+import { Slider } from '@/blocks/Slider/Component'
+import { ImportIcon } from 'lucide-react'
+import { FAQBlock } from '@/blocks/FAQ/Component'
+import { Logo } from '@/blocks/Logo/Components'
+import { ConteComponent } from '@/blocks/Conten/Component'
+import { OemBlock } from '@/blocks/Oem/Component'
+import { DownComponent } from '@/blocks/Down/Component'
+
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -14,6 +24,15 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  right: Right,
+  main: MainBlock,
+  slider: Slider,
+  faq: FAQBlock,
+  logo: Logo,
+  conten: ConteComponent,
+  oem: OemBlock,
+  down: DownComponent
+
 }
 
 export const RenderBlocks: React.FC<{
@@ -35,7 +54,7 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div className="my-16" key={index}>
-                  {/* @ts-expect-error there may be some mismatch between the expected types here */}
+
                   <Block {...block} disableInnerContainer />
                 </div>
               )
@@ -46,6 +65,5 @@ export const RenderBlocks: React.FC<{
       </Fragment>
     )
   }
-
   return null
 }

@@ -12,6 +12,14 @@ import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { Right } from '../../blocks/Right/config'
+import { Main } from '../../blocks/Main/config'
+import { Slider } from '../../blocks/Slider/config'
+import { FAQ } from '../../blocks/FAQ/config'
+import { Logo } from '../../blocks/Logo/config'
+import { Conten } from '../../blocks/Conten/config'
+import { Oem } from '../../blocks/Oem/config'
+ import { Down } from '../../blocks/Down/config'
 
 import {
   MetaDescriptionField,
@@ -29,9 +37,8 @@ export const Pages: CollectionConfig<'pages'> = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a page is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'pages'>
+
+  
   defaultPopulate: {
     title: true,
     slug: true,
@@ -72,7 +79,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, Right, Main, Slider, FAQ, Logo, Conten, Oem, Down],
               required: true,
               admin: {
                 initCollapsed: true,
