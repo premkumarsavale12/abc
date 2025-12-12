@@ -18,6 +18,12 @@ import { OemBlock } from '@/blocks/Oem/Component'
 import { DownComponent } from '@/blocks/Down/Component'
 
 
+
+ type BlockWithExtraProps = Page['layout'][0] & {
+  disableInnerContainer?: boolean;
+};
+
+
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
@@ -34,36 +40,29 @@ const blockComponents = {
   down: DownComponent
 
 }
-
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
-}> = (props) => {
-  const { blocks } = props
+}> = ({ blocks }) => {
 
-  const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
+  if (!blocks?.length) return null;
 
-  if (hasBlocks) {
-    return (
-      <Fragment>
-        {blocks.map((block, index) => {
-          const { blockType } = block
+  return (
+    <Fragment>
+      {blocks.map((block, index) => {
+        const { blockType } = block;
 
-          if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType]
+        if (blockType && blockType in blockComponents) {
+     const Block = blockComponents[blockType as keyof typeof blockComponents] as React.ComponentType<any>;
 
-            if (Block) {
-              return (
-                <div className="my-16" key={index}>
+          return (
+            <div className="my-16" key={index}>
+                <Block {...(block as any)} disableInnerContainer={true} />
+            </div>
+          );
+        }
 
-                  <Block {...block} disableInnerContainer />
-                </div>
-              )
-            }
-          }
-          return null
-        })}
-      </Fragment>
-    )
-  }
-  return null
+        return null;
+      })}
+    </Fragment>
+  );
 }
